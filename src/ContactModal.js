@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { Button, Icon, Modal } from 'semantic-ui-react';
+import { Button, Icon, Modal, Header } from 'semantic-ui-react';
 import emailjs from 'emailjs-com';
 
 
@@ -9,6 +9,7 @@ const ContactModal = () => {
 
   //States
   const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
 
   // EmailJS
   const form = useRef();
@@ -17,7 +18,13 @@ const ContactModal = () => {
 
     emailjs.sendForm('service_ns631vs', 'contact_form', form.current, 'user_TnY5a5lrQ29TcAvOHuN56')
       .then((result) => {
+        console.log(result);
         console.log(result.text);
+        if (result.status === 200 || result.text === 'OK') {
+          setMessage("Your message has been sent sucessfully!")
+        } else {
+          setMessage("Some Error Occured!! Please try Again")
+        }
       }, (error) => {
         console.log(error.text);
       });
@@ -61,6 +68,11 @@ const ContactModal = () => {
             </form>
           </Modal.Description>
         </Modal.Content>
+        <Modal.Actions>
+          <Header textAlign='center'>
+            {message}
+          </Header>
+        </Modal.Actions>
       </Modal>
     </div>
   );
