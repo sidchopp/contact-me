@@ -63,16 +63,22 @@ const ContactModal = () => {
                 <textarea placeholder="Tell me what do you want to talk about..." rows="10" name="message" ></textarea>
               </div>
               <div className="field">
-                <button className="ui button primary" value="Send" >Submit</button>
+                <button className="ui left floated  button positive " value="Send" >
+                  Submit
+                </button>
+                <button
+                  className="ui right floated button primary"
+                  value="Send"
+                  onClick={() => setOpen(false)} >
+                  <Icon name='angle left' /> Back
+                </button>
               </div>
+              <Header textAlign='center'>
+                {message}
+              </Header>
             </form>
           </Modal.Description>
         </Modal.Content>
-        <Modal.Actions>
-          <Header textAlign='center'>
-            {message}
-          </Header>
-        </Modal.Actions>
       </Modal>
     </div>
   );
